@@ -5,13 +5,12 @@
 package frc.robot.Constants;
 
 /** Add your docs here. */
-public class DriveSubConstants {
-    public static final double SPEED_LIMIT = 0.65;
-    public static final double ROTATION_LIMIT = 0.34;
+public class ArmSubConstants {
+    public static final double MAX_ROTATION_SPEED = 0.3;
 
     //PID
-    public static final double KP = 0.1;
-    public static final double KI = 0.3;
+    public static final double KP = 0.05;
+    public static final double KI = 0.01;
     public static final double KD = 0.008;
     public static final double LIMIT = 10;
 }

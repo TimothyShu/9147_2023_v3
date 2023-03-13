@@ -9,8 +9,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DevicePorts;
+import frc.robot.DevicePorts;
+import frc.robot.Constants.ArmSubConstants;
+import frc.robot.Variables.PIDVariables;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
@@ -22,6 +25,34 @@ public class ArmSubsystem extends SubsystemBase {
   public ArmSubsystem() {
     ArmPivotMotor.setInverted(false);
     ArmTelescopeMotor.setInverted(false);
+  }
+
+  public void move_to_position(double extension, double rotation) {
+    double dT = Timer.getFPGATimestamp() - PIDVariables.lastTimestamp;
+
+    //rotational PID
+
+    //either use gyroscope or encoder
+    double ArmPivotError = rotation - ArmPivotencoder.getPosition();
+    double ArmPivotErrorSum = PIDVariables.ArmPivotErrorSum;
+    double ArmPivotLastError = PIDVariables.ArmPivotLastError;
+
+    if (Math.abs(ArmPivotError)<ArmSubConstants.LIMIT) {
+      ArmPivotErrorSum += ArmPivotError * dT;
+    }
+
+    double ArmPivotError_rate = (ArmPivotError - ArmPivotLastError) / dT;
+
+    PIDVariables.ArmPivotErrorSum = ArmPivotErrorSum;
+    PIDVariables.ArmPivotLastError = ArmPivotError;
+
+    double turnspeed = ArmSubConstants.KP * ArmPivotError + ArmSubConstants.KI * ArmPivotErrorSum + ArmSubConstants.KD * ArmPivotError_rate;
+
+    set_turn_speed(turnspeed);
+  }
+
+  public void set_turn_speed(double speed) {
+    ArmPivotMotor.set(speed * ArmSubConstants.MAX_ROTATION_SPEED);
   }
 
   @Override

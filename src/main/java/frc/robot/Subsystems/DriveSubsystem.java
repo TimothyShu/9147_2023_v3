@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DevicePorts;
+import frc.robot.DevicePorts;
 import frc.robot.Constants.DriveSubConstants;
-import frc.robot.PIDVariables;
+import frc.robot.Variables.PIDVariables;
 
 
 public class DriveSubsystem extends SubsystemBase {
@@ -85,7 +85,7 @@ public class DriveSubsystem extends SubsystemBase {
     double dt = Timer.getFPGATimestamp() - lastTimestamp;
 
     //integration
-    if (Math.abs(error)<PIDVariables.DRIVE_HEADING_LIMIT) {
+    if (Math.abs(error)<DriveSubConstants.LIMIT) {
       errorsum += error * dt;
     }
 
@@ -99,7 +99,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     //combining all terms
 
-    double turnspeed = PIDVariables.DRIVE_HEADING_KP * error + PIDVariables.DRIVE_HEADING_KI * errorsum + PIDVariables.DRIVE_HEADING_KD * error_rate;
+    double turnspeed = DriveSubConstants.KP * error + DriveSubConstants.KI * errorsum + DriveSubConstants.KD * error_rate;
 
     if (turnspeed > 1) {
       turnspeed = 1;
