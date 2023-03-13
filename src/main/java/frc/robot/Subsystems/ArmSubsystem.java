@@ -4,11 +4,25 @@
 
 package frc.robot.Subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.DevicePorts;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-  public ArmSubsystem() {}
+
+  private final static CANSparkMax ArmPivotMotor = new CANSparkMax(DevicePorts.ARM_PIVOT_MOTOR, MotorType.kBrushless);
+  private final static RelativeEncoder ArmPivotencoder = ArmPivotMotor.getEncoder();
+  private final static VictorSPX ArmTelescopeMotor = new VictorSPX(DevicePorts.ARM_TELESCOPE_MOTOR);
+
+  public ArmSubsystem() {
+    ArmPivotMotor.setInverted(false);
+    ArmTelescopeMotor.setInverted(false);
+  }
 
   @Override
   public void periodic() {
