@@ -9,8 +9,8 @@ public class ArmSubConstants {
     public static final double MAX_ROTATION_SPEED = 0.3;
 
     //PID
-    public static final double KP = 0.05;
-    public static final double KI = 0.01;
-    public static final double KD = 0.008;
-    public static final double LIMIT = 10;
+    public static final double PIVOT_KP = 0.05;
+    public static final double PIVOT_KI = 0.01;
+    public static final double PIVOT_KD = 0.008;
+    public static final double PIVOT_LIMIT = 10;
 }
