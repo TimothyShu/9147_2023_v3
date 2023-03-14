@@ -149,7 +149,7 @@ public class RobotContainer {
     Button_left_up.onTrue(DefaultPos);
     Button_left_down.onTrue(Pos1);
     Button_right_up.onTrue(Pos2);
-    Button_right_up.onTrue(Pos3);
+    Button_right_down.onTrue(Pos3);
   }
 
   private double GetJoystickX () {
