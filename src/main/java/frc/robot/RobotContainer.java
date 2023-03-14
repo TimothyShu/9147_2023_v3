@@ -81,7 +81,7 @@ public class RobotContainer {
   private void configureBindings() {
 
     //defaultcommands
-    armSubsystem.setDefaultCommand(new Arm(armSubsystem));
+    armSubsystem.setDefaultCommand(new Arm(armSubsystem, () -> getJoystickY(), () -> GetJoystickX()));
 
     driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, () -> joystick1.getLeftY(), () -> getJoystickY(), () -> GetJoystickX()));
 

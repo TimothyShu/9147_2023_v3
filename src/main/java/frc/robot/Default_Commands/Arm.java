@@ -4,26 +4,58 @@
 
 package frc.robot.Default_Commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ArmSubConstants;
 import frc.robot.Subsystems.ArmSubsystem;
+import frc.robot.Variables.TargetVariables;
 
 public class Arm extends CommandBase {
   ArmSubsystem armSubsystem;
+  DoubleSupplier JoystickY;
+  DoubleSupplier JoystickX;
   /** Creates a new Arm. */
-  public Arm(ArmSubsystem armSubsystem) {
+  public Arm(ArmSubsystem armSubsystem, DoubleSupplier JoystickY, DoubleSupplier JoystickX) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.armSubsystem = armSubsystem;
+    this.JoystickY = JoystickY;
+    this.JoystickX = JoystickX;
     addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    DefaultPosition();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    TargetVariables.PivotTargetOffset = JoystickX.getAsDouble();
+    TargetVariables.TelescopeTargetOffset = JoystickY.getAsDouble();
     armSubsystem.move_to_position();
+  }
+
+  public void DefaultPosition() {
+    TargetVariables.BasePivotTarget = ArmSubConstants.DEFAULT_PIVOT;
+    TargetVariables.BaseTelescopeTarget = ArmSubConstants.DEFAULT_TELESCOPE;
+  }
+
+  public void Position1() {
+    TargetVariables.BasePivotTarget = ArmSubConstants.POS1_PIVOT;
+    TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS1_TELESCOPE;
+  }
+
+  public void Position2 () {
+    TargetVariables.BasePivotTarget = ArmSubConstants.POS2_PIVOT;
+    TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS2_TELESCOPE;
+  }
+
+  public void Position3 () {
+    TargetVariables.BasePivotTarget = ArmSubConstants.POS3_PIVOT;
+    TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS3_TELESCOPE;
   }
 
   // Called once the command ends or is interrupted.
