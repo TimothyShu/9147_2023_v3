@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Default_Commands.*;
+import frc.robot.Subsystems.*;
 
 public class RobotContainer {
 
@@ -21,12 +23,21 @@ public class RobotContainer {
 
   Joystick joystick2 = new Joystick(1);
 
+  ArmSubsystem armSubsystem = new ArmSubsystem();
+  DriveSubsystem driveSubsystem = new DriveSubsystem();
+  GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
+
 
   public RobotContainer() {
     configureBindings();
   }
 
   private void configureBindings() {
+
+    //defaultcommands
+    armSubsystem.setDefaultCommand(new Arm(armSubsystem));
+
+
     Trigger leftTrigger = new JoystickButton(joystick1, 5);
 
     //right trigger on controller
@@ -51,6 +62,16 @@ public class RobotContainer {
     Trigger Side_left_down = new JoystickButton(joystick2, 11);
     Trigger Side_right_down = new JoystickButton(joystick2, 12);
   }
+
+  private double GetJoystickX () {
+    return joystick2.getRawAxis(0);
+  }
+
+  private double getJoystickY () {
+    return joystick2.getRawAxis(1);
+  }
+
+
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");

@@ -41,7 +41,7 @@ public class DriveSubsystem extends SubsystemBase {
     Left_speed_group.setInverted(true);
   }
 
-  public void drive(double speed, double rotation) {
+  public void Arcadedrive(double speed, double rotation) {
 
     speed = speed * speed_limit;
     rotation = rotation * rotation_limit;
@@ -111,7 +111,7 @@ public class DriveSubsystem extends SubsystemBase {
     //we set the motors to these values
     SmartDashboard.putNumber("Heading drive rotation output", turnspeed);
     SmartDashboard.putNumber("Heading drive speed output", speed);
-    drive(speed, turnspeed);
+    Arcadedrive(speed, turnspeed);
   }
 
   public void Brakemode() {

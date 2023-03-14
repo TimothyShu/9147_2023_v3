@@ -10,10 +10,12 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DevicePorts;
 import frc.robot.Constants.ArmSubConstants;
 import frc.robot.Variables.PIDVariables;
+import frc.robot.Variables.TargetVariables;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
@@ -27,13 +29,17 @@ public class ArmSubsystem extends SubsystemBase {
     ArmTelescopeMotor.setInverted(false);
   }
 
-  public void move_to_position(double extension, double rotation) {
+  public void move_to_position() {
+
+    double PivotTarget = TargetVariables.PivotTarget;
+    //double TelescopeTarget = TargetVariables.TelescopeTarget;
+
     double dT = Timer.getFPGATimestamp() - PIDVariables.lastTimestamp;
 
     //rotational PID
 
     //either use gyroscope or encoder
-    double ArmPivotError = rotation - ArmPivotencoder.getPosition();
+    double ArmPivotError = PivotTarget - ArmPivotencoder.getPosition();
     double ArmPivotErrorSum = PIDVariables.ArmPivotErrorSum;
     double ArmPivotLastError = PIDVariables.ArmPivotLastError;
 
@@ -53,6 +59,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void set_turn_speed(double speed) {
     ArmPivotMotor.set(speed * ArmSubConstants.MAX_ROTATION_SPEED);
+    SmartDashboard.putNumber("Pivot turn speed", speed * ArmSubConstants.MAX_ROTATION_SPEED);
   }
 
   @Override
