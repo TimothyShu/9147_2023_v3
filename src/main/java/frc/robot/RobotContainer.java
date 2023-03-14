@@ -8,10 +8,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Default_Commands.*;
 import frc.robot.Subsystems.*;
+import frc.robot.Variables.SubsystemVariables;
 
 public class RobotContainer {
 
@@ -27,6 +29,50 @@ public class RobotContainer {
   DriveSubsystem driveSubsystem = new DriveSubsystem();
   GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
 
+  // __________________________
+  //|                          |
+  //|    Instant Commands      |
+  //|__________________________|
+  InstantCommand Brakemode = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      driveSubsystem.Brakemode();
+    }
+  }
+  , driveSubsystem);
+
+  InstantCommand Coastmode = new InstantCommand(new Runnable() {@Override
+    public void run() {
+      driveSubsystem.Coastmode();
+    }
+  }, driveSubsystem);
+
+  InstantCommand ArcadeDrive = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      SubsystemVariables.DriveMode = "Arcade";
+    }
+  }, driveSubsystem);
+
+  InstantCommand HeadingDrive = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      SubsystemVariables.DriveMode = "Heading";
+    }
+  }, driveSubsystem);
+
+  InstantCommand AutoBalance = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      SubsystemVariables.DriveMode = "Balance";
+    }
+  }, driveSubsystem);
+
+  // __________________________
+  //|                          |
+  //|    RobotContainer        |
+  //|__________________________|
+
 
   public RobotContainer() {
     configureBindings();
@@ -36,6 +82,8 @@ public class RobotContainer {
 
     //defaultcommands
     armSubsystem.setDefaultCommand(new Arm(armSubsystem));
+
+    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, () -> joystick1.getLeftY(), () -> getJoystickY(), () -> GetJoystickX()));
 
 
     Trigger leftTrigger = new JoystickButton(joystick1, 5);
@@ -61,6 +109,13 @@ public class RobotContainer {
     Trigger Side_right_mid = new JoystickButton(joystick2, 10);
     Trigger Side_left_down = new JoystickButton(joystick2, 11);
     Trigger Side_right_down = new JoystickButton(joystick2, 12);
+
+    leftTrigger.onTrue(Coastmode);
+    rightTrigger.onTrue(Brakemode);
+
+    ButtonX.onTrue(ArcadeDrive);
+    ButtonY.onTrue(HeadingDrive);
+    ButtonA.onTrue(AutoBalance);
   }
 
   private double GetJoystickX () {

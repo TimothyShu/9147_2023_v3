@@ -4,10 +4,10 @@
 
 package frc.robot.Default_Commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.Subsystems.DriveSubsystem;
 import frc.robot.Variables.SubsystemVariables;
 import frc.robot.auto.AutoBalance;
@@ -19,10 +19,13 @@ public class Drive extends CommandBase {
   double turn;
   double heading;
   Command Balance = new AutoBalance(driveSubsystem);
-  SendableChooser<Command> DriveChooser = new SendableChooser<>();
-  public Drive(DriveSubsystem driveSubsystem) {
+  DoubleSupplier LeftY, RightY, RightX;
+  public Drive(DriveSubsystem driveSubsystem, DoubleSupplier LeftY, DoubleSupplier RightY, DoubleSupplier RightX) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveSubsystem = driveSubsystem;
+    this.LeftY = LeftY;
+    this.RightY = RightY;
+    this.RightX = RightX;
     addRequirements(driveSubsystem);
   }
 
@@ -36,6 +39,9 @@ public class Drive extends CommandBase {
   @Override
   public void execute() {
     String mode = SubsystemVariables.DriveMode;
+    speed = LeftY.getAsDouble();
+    turn = RightX.getAsDouble();
+    heading = Math.toDegrees(Math.atan2(RightY.getAsDouble(), RightX.getAsDouble()));
     switch (mode) {
       case "Arcade":
         driveSubsystem.Arcadedrive(speed, turn);

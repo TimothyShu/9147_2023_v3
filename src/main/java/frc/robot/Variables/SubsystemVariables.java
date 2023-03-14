@@ -7,6 +7,7 @@ package frc.robot.Variables;
 /** Add your docs here. */
 public class SubsystemVariables {
     public static String DriveMode = "Arcade";
+    public static String Armpos = "Default";
 
     public static double DriveAutoBalanceAngle = 0;
 }

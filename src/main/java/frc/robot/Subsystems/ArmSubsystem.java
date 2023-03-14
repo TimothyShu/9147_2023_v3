@@ -43,7 +43,7 @@ public class ArmSubsystem extends SubsystemBase {
     double ArmPivotErrorSum = PIDVariables.ArmPivotErrorSum;
     double ArmPivotLastError = PIDVariables.ArmPivotLastError;
 
-    if (Math.abs(ArmPivotError)<ArmSubConstants.LIMIT) {
+    if (Math.abs(ArmPivotError)<ArmSubConstants.PIVOT_LIMIT) {
       ArmPivotErrorSum += ArmPivotError * dT;
     }
 
@@ -52,7 +52,7 @@ public class ArmSubsystem extends SubsystemBase {
     PIDVariables.ArmPivotErrorSum = ArmPivotErrorSum;
     PIDVariables.ArmPivotLastError = ArmPivotError;
 
-    double turnspeed = ArmSubConstants.KP * ArmPivotError + ArmSubConstants.KI * ArmPivotErrorSum + ArmSubConstants.KD * ArmPivotError_rate;
+    double turnspeed = ArmSubConstants.PIVOT_KP * ArmPivotError + ArmSubConstants.PIVOT_KI * ArmPivotErrorSum + ArmSubConstants.PIVOT_KD * ArmPivotError_rate;
 
     set_turn_speed(turnspeed);
   }
