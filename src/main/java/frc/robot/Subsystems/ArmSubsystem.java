@@ -27,6 +27,7 @@ public class ArmSubsystem extends SubsystemBase {
   public ArmSubsystem() {
     ArmPivotMotor.setInverted(false);
     ArmTelescopeMotor.setInverted(false);
+    DefaultPosition();
   }
 
   public void move_to_position() {
@@ -60,6 +61,26 @@ public class ArmSubsystem extends SubsystemBase {
   public void set_turn_speed(double speed) {
     ArmPivotMotor.set(speed * ArmSubConstants.MAX_ROTATION_SPEED);
     SmartDashboard.putNumber("Pivot turn speed", speed * ArmSubConstants.MAX_ROTATION_SPEED);
+  }
+
+  public void DefaultPosition() {
+    TargetVariables.BasePivotTarget = ArmSubConstants.DEFAULT_PIVOT;
+    TargetVariables.BaseTelescopeTarget = ArmSubConstants.DEFAULT_TELESCOPE;
+  }
+
+  public void Position1() {
+    TargetVariables.BasePivotTarget = ArmSubConstants.POS1_PIVOT;
+    TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS1_TELESCOPE;
+  }
+
+  public void Position2 () {
+    TargetVariables.BasePivotTarget = ArmSubConstants.POS2_PIVOT;
+    TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS2_TELESCOPE;
+  }
+
+  public void Position3 () {
+    TargetVariables.BasePivotTarget = ArmSubConstants.POS3_PIVOT;
+    TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS3_TELESCOPE;
   }
 
   @Override

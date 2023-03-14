@@ -68,6 +68,34 @@ public class RobotContainer {
     }
   }, driveSubsystem);
 
+  InstantCommand DefaultPos = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      armSubsystem.DefaultPosition();
+    }
+  }, armSubsystem);
+
+  InstantCommand Pos1 = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      armSubsystem.Position1();;
+    }
+  }, armSubsystem);
+  
+  InstantCommand Pos2 = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      armSubsystem.Position2();
+    }
+  }, armSubsystem);
+
+  InstantCommand Pos3 = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      armSubsystem.Position3();
+    }
+  }, armSubsystem);
+
   // __________________________
   //|                          |
   //|    RobotContainer        |
@@ -116,6 +144,12 @@ public class RobotContainer {
     ButtonX.onTrue(ArcadeDrive);
     ButtonY.onTrue(HeadingDrive);
     ButtonA.onTrue(AutoBalance);
+
+    //Joystick
+    Button_left_up.onTrue(DefaultPos);
+    Button_left_down.onTrue(Pos1);
+    Button_right_up.onTrue(Pos2);
+    Button_right_up.onTrue(Pos3);
   }
 
   private double GetJoystickX () {
@@ -125,6 +159,7 @@ public class RobotContainer {
   private double getJoystickY () {
     return joystick2.getRawAxis(1);
   }
+
 
 
 
