@@ -9,5 +9,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 
 /** Add your docs here. */
 public class OdomoetryConstants {
-    Pose2d BLUEPOS1 = new Pose2d(13.5, 14.2, new Rotation2d(Math.toRadians(180)));
+    public static final Pose2d BLUEPOS1 = new Pose2d(13.5, 14.2, new Rotation2d(Math.toRadians(180)));
+    public static Pose2d CurrPose2d = new Pose2d(0,0, new Rotation2d());
 }

@@ -6,6 +6,7 @@ package frc.robot.Subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.GyroConstants;
 
@@ -15,6 +16,10 @@ public class GyroSubsystem extends SubsystemBase {
   private final static AHRS Gyro = new AHRS();
 
   public GyroSubsystem() {}
+
+  public Rotation2d GetRotation2d() {
+    return Gyro.getRotation2d();
+  }
 
   public static double get_yaw() {
     return Gyro.getYaw() - GyroConstants.YAW_OFFSET;

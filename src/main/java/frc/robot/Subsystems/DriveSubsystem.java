@@ -4,11 +4,14 @@
 
 package frc.robot.Subsystems;
 
+import java.util.Arrays;
+import java.util.List;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,6 +38,9 @@ public class DriveSubsystem extends SubsystemBase {
   //Motor Controller groups
   private final static MotorControllerGroup Right_speed_group = new MotorControllerGroup(RightMotor1, RightMotor2);
   private final static MotorControllerGroup Left_speed_group = new MotorControllerGroup(LeftMotor1, LeftMotor2);
+
+  Encoder LeftEncoder = new Encoder(DevicePorts.LEFT_ENCODER_A, DevicePorts.LEFT_ENCODER_B);
+  Encoder RightEncoder = new Encoder(DevicePorts.RIGHT_ENCODER_A, DevicePorts.RIGHT_ENOCDER_B);
 
   public DriveSubsystem() {
     Right_speed_group.setInverted(false);
@@ -112,6 +118,10 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Heading drive rotation output", turnspeed);
     SmartDashboard.putNumber("Heading drive speed output", speed);
     Arcadedrive(speed, turnspeed);
+  }
+
+  public List<Double> GetEncoderValues() {
+    return Arrays.asList(LeftEncoder.getDistance(), RightEncoder.getDistance());
   }
 
   public void Brakemode() {

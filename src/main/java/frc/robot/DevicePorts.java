@@ -17,6 +17,12 @@ public class DevicePorts {
     public static final int GRABBER_LEFT_SERVO = 8;
     public static final int ARM_TELESCOPE_MOTOR = 9;
 
+    //ports for drive motor encoders
+    public static final int LEFT_ENCODER_A = 0;
+    public static final int LEFT_ENCODER_B = 1;
+    public static final int RIGHT_ENCODER_A = 2;
+    public static final int RIGHT_ENOCDER_B = 3;
+
     //ports for ultrasound
     public static final int ARM_US_SENSOR = 3;
     public static final int GRABBER_US_SENSOR = 2;
