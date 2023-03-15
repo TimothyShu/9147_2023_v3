@@ -96,6 +96,20 @@ public class RobotContainer {
     }
   }, armSubsystem);
 
+  InstantCommand RetractGrabber = new InstantCommand(new Runnable() {
+    @Override
+    public void run() {
+      SubsystemVariables.GrabberMode = "Retract";
+    }
+  }, grabberSubsystem);
+
+  InstantCommand ExtendGrabber = new InstantCommand(new Runnable() {
+    @Override 
+    public void run() {
+      SubsystemVariables.GrabberMode = "Retract";
+    }
+  }, grabberSubsystem);
+
   // __________________________
   //|                          |
   //|    RobotContainer        |
@@ -112,6 +126,8 @@ public class RobotContainer {
     armSubsystem.setDefaultCommand(new Arm(armSubsystem, () -> getJoystickY(), () -> GetJoystickX()));
 
     driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, () -> joystick1.getLeftY(), () -> getJoystickY(), () -> GetJoystickX()));
+
+    grabberSubsystem.setDefaultCommand(new Grabber(grabberSubsystem));
 
 
     Trigger leftTrigger = new JoystickButton(joystick1, 5);
@@ -150,6 +166,8 @@ public class RobotContainer {
     Button_left_down.onTrue(Pos1);
     Button_right_up.onTrue(Pos2);
     Button_right_down.onTrue(Pos3);
+    Trigger_front.onTrue(RetractGrabber);
+    Side_button.onTrue(ExtendGrabber);
   }
 
   private double GetJoystickX () {
@@ -159,9 +177,6 @@ public class RobotContainer {
   private double getJoystickY () {
     return joystick2.getRawAxis(1);
   }
-
-
-
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");

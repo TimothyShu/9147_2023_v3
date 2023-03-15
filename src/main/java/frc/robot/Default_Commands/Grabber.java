@@ -5,11 +5,16 @@
 package frc.robot.Default_Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Subsystems.GrabberSubsystem;
+import frc.robot.Variables.SubsystemVariables;
 
 public class Grabber extends CommandBase {
+  GrabberSubsystem grabberSubsystem;
   /** Creates a new Grabber. */
-  public Grabber() {
+  public Grabber(GrabberSubsystem grabberSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.grabberSubsystem = grabberSubsystem;
+    addRequirements(grabberSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -18,7 +23,20 @@ public class Grabber extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    String mode = SubsystemVariables.GrabberMode;
+    switch (mode) {
+      case "Retract":
+        grabberSubsystem.MotorStrength(-1);
+        break;
+      case "Extend":
+        grabberSubsystem.MotorStrength(1);
+        break;
+      case "Stop":
+        grabberSubsystem.MotorStrength(0);
+        break;
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override

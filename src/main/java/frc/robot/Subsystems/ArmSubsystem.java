@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DevicePorts;
 import frc.robot.Constants.ArmSubConstants;
 import frc.robot.Variables.PIDVariables;
+import frc.robot.Variables.SubsystemVariables;
 import frc.robot.Variables.TargetVariables;
 
 public class ArmSubsystem extends SubsystemBase {
@@ -66,21 +67,25 @@ public class ArmSubsystem extends SubsystemBase {
   public void DefaultPosition() {
     TargetVariables.BasePivotTarget = ArmSubConstants.DEFAULT_PIVOT;
     TargetVariables.BaseTelescopeTarget = ArmSubConstants.DEFAULT_TELESCOPE;
+    SubsystemVariables.ArmPos = "DefaultPos";
   }
 
   public void Position1() {
     TargetVariables.BasePivotTarget = ArmSubConstants.POS1_PIVOT;
     TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS1_TELESCOPE;
+    SubsystemVariables.ArmPos = "Pos1";
   }
 
   public void Position2 () {
     TargetVariables.BasePivotTarget = ArmSubConstants.POS2_PIVOT;
     TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS2_TELESCOPE;
+    SubsystemVariables.ArmPos = "Pos2";
   }
 
   public void Position3 () {
     TargetVariables.BasePivotTarget = ArmSubConstants.POS3_PIVOT;
     TargetVariables.BaseTelescopeTarget = ArmSubConstants.POS3_TELESCOPE;
+    SubsystemVariables.ArmPos = "Pos3";
   }
 
   @Override
