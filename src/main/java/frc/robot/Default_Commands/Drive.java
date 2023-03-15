@@ -8,9 +8,9 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Auto.AutoBalance;
 import frc.robot.Subsystems.DriveSubsystem;
 import frc.robot.Variables.SubsystemVariables;
-import frc.robot.auto.AutoBalance;
 
 public class Drive extends CommandBase {
   /** Creates a new Drive. */
