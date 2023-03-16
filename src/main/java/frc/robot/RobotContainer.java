@@ -162,12 +162,12 @@ public class RobotContainer {
     ButtonA.onTrue(AutoBalance);
 
     //Joystick
-    Button_left_up.onTrue(DefaultPos);
-    Button_left_down.onTrue(Pos1);
-    Button_right_up.onTrue(Pos2);
-    Button_right_down.onTrue(Pos3);
-    Trigger_front.onTrue(RetractGrabber);
-    Side_button.onTrue(ExtendGrabber);
+    Button_left_up.onTrue(new InstantCommand(() -> {armSubsystem.DefaultPosition();}));
+    Button_left_down.onTrue(new InstantCommand(() -> {armSubsystem.Position1();}));
+    Button_right_up.onTrue(new InstantCommand(() -> {armSubsystem.Position2();}));
+    Button_right_down.onTrue(new InstantCommand(() -> {armSubsystem.Position3();}));
+    Trigger_front.onTrue(new InstantCommand(() -> {SubsystemVariables.GrabberMode = "Retract";}));
+    Side_button.onTrue(new InstantCommand(() -> {SubsystemVariables.GrabberMode = "Extend";}));
   }
 
   private double GetJoystickX () {
