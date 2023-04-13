@@ -136,7 +136,7 @@ public class RobotContainer {
     //configure the buttons below
 
     Trigger ButtonA = new JoystickButton(joystick1, 1);
-    Trigger ButtonB = new JoystickButton(joystick1, 2);
+    //Trigger ButtonB = new JoystickButton(joystick1, 2);
     Trigger ButtonX = new JoystickButton(joystick1, 3);
     Trigger ButtonY = new JoystickButton(joystick1, 4);
 
@@ -146,12 +146,12 @@ public class RobotContainer {
     Trigger Button_right_down = new JoystickButton(joystick2, 4);
     Trigger Button_left_up = new JoystickButton(joystick2, 5);
     Trigger Button_right_up = new JoystickButton(joystick2, 6);
-    Trigger Side_left_top = new JoystickButton(joystick2, 7);
-    Trigger Side_right_top = new JoystickButton(joystick2, 8);
-    Trigger Side_left_mid = new JoystickButton(joystick2, 9);
-    Trigger Side_right_mid = new JoystickButton(joystick2, 10);
-    Trigger Side_left_down = new JoystickButton(joystick2, 11);
-    Trigger Side_right_down = new JoystickButton(joystick2, 12);
+    //Trigger Side_left_top = new JoystickButton(joystick2, 7);
+    //Trigger Side_right_top = new JoystickButton(joystick2, 8);
+    //Trigger Side_left_mid = new JoystickButton(joystick2, 9);
+    //Trigger Side_right_mid = new JoystickButton(joystick2, 10);
+    //Trigger Side_left_down = new JoystickButton(joystick2, 11);
+    //Trigger Side_right_down = new JoystickButton(joystick2, 12);
 
     leftTrigger.onTrue(Coastmode);
     rightTrigger.onTrue(Brakemode);
