@@ -40,7 +40,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final static MotorControllerGroup Left_speed_group = new MotorControllerGroup(LeftMotor1, LeftMotor2);
 
   Encoder LeftEncoder = new Encoder(DevicePorts.LEFT_ENCODER_A, DevicePorts.LEFT_ENCODER_B);
-  Encoder RightEncoder = new Encoder(DevicePorts.RIGHT_ENCODER_A, DevicePorts.RIGHT_ENOCDER_B);
+  Encoder RightEncoder = new Encoder(DevicePorts.RIGHT_ENCODER_A, DevicePorts.RIGHT_ENCODER_B);
 
   public DriveSubsystem() {
     Right_speed_group.setInverted(false);
@@ -141,5 +141,7 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Left Encoder", LeftEncoder.getRaw());
+    SmartDashboard.putNumber("Right Enocder", RightEncoder.getRaw());
   }
 }

@@ -19,7 +19,6 @@ public class RobotContainer {
 
   //declare subsystems
 
-  SubsystemsAll Subsystems = new SubsystemsAll();
 
   XboxController joystick1 = new XboxController(0);
 
@@ -159,7 +158,7 @@ public class RobotContainer {
 
     ButtonX.onTrue(ArcadeDrive);
     ButtonY.onTrue(HeadingDrive);
-    ButtonA.onTrue(AutoBalance);
+    //ButtonA.onTrue(AutoBalance);
 
     //Joystick
     Button_left_up.onTrue(new InstantCommand(() -> {armSubsystem.DefaultPosition();}));

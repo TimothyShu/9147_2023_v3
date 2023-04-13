@@ -21,7 +21,7 @@ public class DevicePorts {
     public static final int LEFT_ENCODER_A = 0;
     public static final int LEFT_ENCODER_B = 1;
     public static final int RIGHT_ENCODER_A = 2;
-    public static final int RIGHT_ENOCDER_B = 3;
+    public static final int RIGHT_ENCODER_B = 3;
 
     //ports for ultrasound
     public static final int ARM_US_SENSOR = 3;
