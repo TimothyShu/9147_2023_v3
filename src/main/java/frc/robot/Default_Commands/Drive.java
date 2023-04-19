@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.DriveSubsystem;
 import frc.robot.Variables.SubsystemVariables;
+import frc.robot.Variables.TargetVariables;
 import frc.robot.auto.AutoBalance;
 
 public class Drive extends CommandBase {
@@ -43,6 +44,11 @@ public class Drive extends CommandBase {
     speed = LeftY.getAsDouble();
     turn = RightX.getAsDouble();
     heading = Math.toDegrees(Math.atan2(RightY.getAsDouble(), RightX.getAsDouble()));
+
+    //if the user is not putting in a command, then defualt to the last target
+    if (Math.sqrt(Math.pow(RightY.getAsDouble(), 2) + Math.pow(RightX.getAsDouble(), 2)) >= 0.5) {
+      TargetVariables.AngleTarget = heading;
+    }
     switch (mode) {
       case "Arcade":
         SmartDashboard.putString("drive mode", mode);
@@ -50,7 +56,7 @@ public class Drive extends CommandBase {
         break;
       case "Heading":
         SmartDashboard.putString("drive mode", mode);
-        driveSubsystem.gyro_drive(speed, heading);
+        driveSubsystem.gyro_drive(speed, TargetVariables.AngleTarget);
         break;
       case "Balance":
         Balance.schedule();

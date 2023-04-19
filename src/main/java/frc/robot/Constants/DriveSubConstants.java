@@ -16,5 +16,8 @@ public class DriveSubConstants {
     public static final double LIMIT = 10;
 
     //Encoder constants
-    public static final double ENCODER_RATIO = 0.0568;
+    //this is the ration of:
+    // Pulse 20 : 1 rotation 1 : 1 gearbox 1 : 1 wheel 1 : 0.48 circumfrance
+    // 20       : 1            : 0.114       : 0.114     : 0.0549
+    public static final double ENCODER_RATIO = 0.00274;
 }

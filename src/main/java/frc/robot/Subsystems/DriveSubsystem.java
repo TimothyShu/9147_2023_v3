@@ -71,6 +71,9 @@ public class DriveSubsystem extends SubsystemBase {
   public void gyro_drive(double speed, double heading) {
     //using both the heading and the speed
 
+    //update smart dashboard
+    SmartDashboard.putNumber("Target Heading", heading);
+
     //get the current gyro number
     double gyro_yaw = GyroSubsystem.get_yaw();
 
@@ -121,7 +124,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public List<Double> GetEncoderValues() {
-    return Arrays.asList(LeftEncoder.getDistance(), RightEncoder.getDistance());
+    return Arrays.asList(LeftEncoder.getDistance()*DriveSubConstants.ENCODER_RATIO, RightEncoder.getDistance()*DriveSubConstants.ENCODER_RATIO);
   }
 
   public void Brakemode() {
@@ -141,7 +144,7 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Left Encoder", LeftEncoder.getRaw() * DriveSubConstants.ENCODER_RATIO);
-    SmartDashboard.putNumber("Right Enocder", RightEncoder.getRaw() * DriveSubConstants.ENCODER_RATIO);
+    SmartDashboard.putNumber("Left Encoder", LeftEncoder.getDistance()*DriveSubConstants.ENCODER_RATIO);
+    SmartDashboard.putNumber("Right Enocder", RightEncoder.getDistance()*DriveSubConstants.ENCODER_RATIO);
   }
 }

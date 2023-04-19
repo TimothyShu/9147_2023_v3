@@ -27,6 +27,8 @@ public class RobotContainer {
   ArmSubsystem armSubsystem = new ArmSubsystem();
   DriveSubsystem driveSubsystem = new DriveSubsystem();
   GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
+  GyroSubsystem gyroSubsystem = new GyroSubsystem();
+  OdometrySubsystem odometrySubsystem = new OdometrySubsystem(gyroSubsystem, driveSubsystem);
 
   // __________________________
   //|                          |
