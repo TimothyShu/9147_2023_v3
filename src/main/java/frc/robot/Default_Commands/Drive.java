@@ -6,6 +6,7 @@ package frc.robot.Default_Commands;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.DriveSubsystem;
@@ -44,9 +45,11 @@ public class Drive extends CommandBase {
     heading = Math.toDegrees(Math.atan2(RightY.getAsDouble(), RightX.getAsDouble()));
     switch (mode) {
       case "Arcade":
+        SmartDashboard.putString("drive mode", mode);
         driveSubsystem.Arcadedrive(speed, turn);
         break;
       case "Heading":
+        SmartDashboard.putString("drive mode", mode);
         driveSubsystem.gyro_drive(speed, heading);
         break;
       case "Balance":

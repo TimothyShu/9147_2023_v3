@@ -124,7 +124,7 @@ public class RobotContainer {
     //defaultcommands
     armSubsystem.setDefaultCommand(new Arm(armSubsystem, () -> getJoystickY(), () -> GetJoystickX()));
 
-    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, () -> joystick1.getLeftY(), () -> getJoystickY(), () -> GetJoystickX()));
+    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, () -> joystick1.getLeftY(), () -> joystick1.getRightY(), () -> joystick1.getRightX()));
 
     grabberSubsystem.setDefaultCommand(new Grabber(grabberSubsystem));
 
