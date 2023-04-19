@@ -14,4 +14,7 @@ public class DriveSubConstants {
     public static final double KI = 0.3;
     public static final double KD = 0.008;
     public static final double LIMIT = 10;
+
+    //Encoder constants
+    public static final double ENCODER_RATIO = 0.0568;
 }
