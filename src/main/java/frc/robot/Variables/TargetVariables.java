@@ -12,8 +12,14 @@ public class TargetVariables {
     public static double BaseTelescopeTarget = 0.5;
     public static double PivotTargetOffset = 0;
     public static double TelescopeTargetOffset = 0;
-    public static double PivotTarget = BasePivotTarget + PivotTargetOffset;
-    public static double TelescopeTarget = BaseTelescopeTarget + TelescopeTargetOffset;
+
+    public static double GetPivot() {
+        return BasePivotTarget + PivotTargetOffset;
+    }
+
+    public static double GetTelescope() {
+        return BaseTelescopeTarget + TelescopeTargetOffset;
+    }
 
     //this is for the gyro drive mechanism
     public static double AngleTarget = 0;

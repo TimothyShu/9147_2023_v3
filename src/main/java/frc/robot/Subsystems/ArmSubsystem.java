@@ -33,7 +33,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void move_to_position() {
 
-    double PivotTarget = TargetVariables.PivotTarget;
+    double PivotTarget = TargetVariables.GetPivot();
     //double TelescopeTarget = TargetVariables.TelescopeTarget;
 
     double dT = Timer.getFPGATimestamp() - PIDVariables.lastTimestamp;
@@ -57,6 +57,8 @@ public class ArmSubsystem extends SubsystemBase {
     double turnspeed = ArmSubConstants.PIVOT_KP * ArmPivotError + ArmSubConstants.PIVOT_KI * ArmPivotErrorSum + ArmSubConstants.PIVOT_KD * ArmPivotError_rate;
 
     set_turn_speed(turnspeed);
+
+    //
   }
 
   public void set_turn_speed(double speed) {

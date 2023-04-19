@@ -6,6 +6,7 @@ package frc.robot.Default_Commands;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.ArmSubsystem;
 import frc.robot.Variables.TargetVariables;
@@ -31,9 +32,12 @@ public class Arm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    //this changes the values and allows for movement
     TargetVariables.PivotTargetOffset = JoystickX.getAsDouble();
     TargetVariables.TelescopeTargetOffset = JoystickY.getAsDouble();
     armSubsystem.move_to_position();
+    SmartDashboard.putNumber("Pivot Target", TargetVariables.GetPivot());
   }
 
   // Called once the command ends or is interrupted.
