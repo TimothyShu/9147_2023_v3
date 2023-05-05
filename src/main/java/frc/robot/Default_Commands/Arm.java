@@ -6,8 +6,10 @@ package frc.robot.Default_Commands;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.ArmSubsystem;
+import frc.robot.Variables.SubsystemVariables;
 import frc.robot.Variables.TargetVariables;
 
 public class Arm extends CommandBase {
@@ -31,12 +33,14 @@ public class Arm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    double extspeed = JoystickY.getAsDouble();
     //this changes the values and allows for movement
     TargetVariables.PivotTargetOffset = JoystickX.getAsDouble() * 2;
     TargetVariables.TelescopeTargetOffset = JoystickY.getAsDouble();
     armSubsystem.move_to_position();
-    armSubsystem.set_extension_speed(JoystickY.getAsDouble());
+    SmartDashboard.putBoolean("yes", TargetVariables.telescopeauto);
+    armSubsystem.set_extension_speed(extspeed);
+
   }
 
   // Called once the command ends or is interrupted.

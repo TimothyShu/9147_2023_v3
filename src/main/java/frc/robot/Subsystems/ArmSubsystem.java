@@ -66,8 +66,9 @@ public class ArmSubsystem extends SubsystemBase {
     ArmPivotMotor.set(speed * ArmSubConstants.MAX_ROTATION_SPEED);
   }
 
-  public void set_extension_speed(double speed) {
-    ArmTelescopeMotor.set(VictorSPXControlMode.PercentOutput, speed * 0.5);
+  public void set_extension_speed(double testspeed) {
+    SmartDashboard.putNumber("power",testspeed);
+    ArmTelescopeMotor.set(VictorSPXControlMode.PercentOutput, testspeed * 0.5);
   }
 
   public void DefaultPosition() {

@@ -7,6 +7,7 @@ package frc.robot.auto;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.ArmSubsystem;
+import frc.robot.Variables.TargetVariables;
 
 public class extendTelescope extends CommandBase {
   private ArmSubsystem armSubsystem;
@@ -23,22 +24,28 @@ public class extendTelescope extends CommandBase {
   @Override
   public void initialize() {
     this.starttime = Timer.getFPGATimestamp();
+    TargetVariables.telescopeauto = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.set_extension_speed(0.5);
+    double speed = 0.5;
+    armSubsystem.set_extension_speed(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    armSubsystem.set_extension_speed(0);
+    TargetVariables.telescopeauto = false;
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Timer.getFPGATimestamp() - starttime >= time) {
+    double elapsetime = Timer.getFPGATimestamp() - starttime;
+    if (elapsetime >= time) {
       return true;
     } else {
       return false;
