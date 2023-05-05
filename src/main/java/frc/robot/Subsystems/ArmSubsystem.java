@@ -4,6 +4,7 @@
 
 package frc.robot.Subsystems;
 
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -63,7 +64,10 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void set_turn_speed(double speed) {
     ArmPivotMotor.set(speed * ArmSubConstants.MAX_ROTATION_SPEED);
-    SmartDashboard.putNumber("Pivot turn speed", speed * ArmSubConstants.MAX_ROTATION_SPEED);
+  }
+
+  public void set_extension_speed(double speed) {
+    ArmTelescopeMotor.set(VictorSPXControlMode.PercentOutput, speed * 0.5);
   }
 
   public void DefaultPosition() {
@@ -93,5 +97,7 @@ public class ArmSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Pivot Target", TargetVariables.GetPivot());
+    SmartDashboard.putString("Arm position", SubsystemVariables.ArmPos);
   }
 }
