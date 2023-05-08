@@ -41,7 +41,7 @@ public class Drive extends CommandBase {
   @Override
   public void execute() {
     String mode = SubsystemVariables.DriveMode;
-    speed = LeftY.getAsDouble();
+    speed = -LeftY.getAsDouble();
     turn = RightX.getAsDouble();
     heading = Math.toDegrees(Math.atan2(RightY.getAsDouble(), RightX.getAsDouble()));
 

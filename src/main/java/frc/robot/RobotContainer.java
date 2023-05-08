@@ -180,6 +180,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new autoShortSide(armSubsystem);
+    return new autoShortSide(armSubsystem, driveSubsystem);
   }
 }

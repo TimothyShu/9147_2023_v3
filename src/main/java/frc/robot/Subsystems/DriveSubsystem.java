@@ -48,7 +48,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void Arcadedrive(double speed, double rotation) {
-
+    speed = -speed;
     speed = speed * speed_limit;
     rotation = rotation * rotation_limit;
 

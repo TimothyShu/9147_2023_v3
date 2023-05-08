@@ -4,18 +4,18 @@
 
 package frc.robot.auto;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Subsystems.ArmSubsystem;
-import frc.robot.Variables.TargetVariables;
+import frc.robot.Subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.Timer;
+import frc.robot.Variables.SubsystemVariables;
 
-public class extendTelescope extends CommandBase {
-  private ArmSubsystem armSubsystem;
+public class driveForward extends CommandBase {
+  /** Creates a new driveForward. */
+  private DriveSubsystem drivesubsystem;
   private double time;
   private double starttime;
-  /** Creates a new extendTelescope. */
-  public extendTelescope(ArmSubsystem armSubsystem, double time) {
-    this.armSubsystem = armSubsystem;
+  public driveForward(DriveSubsystem drivesubsystem, double time) {
+    this.drivesubsystem = drivesubsystem;
     this.time = time;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -23,22 +23,21 @@ public class extendTelescope extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SubsystemVariables.DriveMode = "Auto";
     this.starttime = Timer.getFPGATimestamp();
-    TargetVariables.telescopeauto = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = -0.5;
-    armSubsystem.set_extension_speed(speed);
+    drivesubsystem.Arcadedrive(0.5, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    armSubsystem.set_extension_speed(0);
-    TargetVariables.telescopeauto = false;
+    drivesubsystem.Arcadedrive(0, 0);
+    SubsystemVariables.DriveMode = "Arcade";
   }
 
   // Returns true when the command should end.
