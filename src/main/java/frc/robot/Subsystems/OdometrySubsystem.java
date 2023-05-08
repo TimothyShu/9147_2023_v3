@@ -17,7 +17,7 @@ public class OdometrySubsystem extends SubsystemBase {
   /** Creates a new OdometrySubsystem. */
   GyroSubsystem gyroSubsystem;
   DriveSubsystem driveSubsystem;
-  Pose2d CurrentPose;
+  static Pose2d CurrentPose;
   DifferentialDriveOdometry Odometry;
   List<Double> EncoderVal;
   Rotation2d GyroAngle;
@@ -29,7 +29,7 @@ public class OdometrySubsystem extends SubsystemBase {
     Odometry = new DifferentialDriveOdometry(gyroSubsystem.GetRotation2d(), EncoderVal.get(0), EncoderVal.get(1), CurrentPose);
   }
 
-  public Pose2d GetCurrPose() {
+  public static Pose2d GetCurrPose() {
     return CurrentPose;
   }
 
