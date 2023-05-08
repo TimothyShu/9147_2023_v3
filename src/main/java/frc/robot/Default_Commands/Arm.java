@@ -39,7 +39,9 @@ public class Arm extends CommandBase {
     TargetVariables.TelescopeTargetOffset = JoystickY.getAsDouble();
     armSubsystem.move_to_position();
     SmartDashboard.putBoolean("yes", TargetVariables.telescopeauto);
-    armSubsystem.set_extension_speed(extspeed);
+    if (TargetVariables.telescopeauto == false){
+      armSubsystem.set_extension_speed(extspeed);
+    }
 
   }
 
