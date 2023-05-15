@@ -20,10 +20,13 @@ public class PIDVariables {
     public static double ArmPivotLastError = 0;
     public static double ArmPivotErrorSum = 0;
 
-
     //Telescope
     public static double ArmTelescopeLastError = 0;
     public static double ArmTelescopeErrorSum = 0;
+
+    //Moveto
+    public static double MovetoLastError = 0;
+    public static double MovetoErrorSum = 0;
 
     public static void UpdateTime() {
         lastTimestamp = Timer.getFPGATimestamp();

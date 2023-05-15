@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Subsystems.ArmSubsystem;
 import frc.robot.Subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.auto.driveForward;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -22,7 +21,6 @@ public class autoShortSide extends SequentialCommandGroup {
     addCommands(
       new InstantCommand(() -> {armSubsystem.Position2();}),
       new extendTelescope(armSubsystem, 2),
-      new driveForward(drivesubsystem,0.5));
-      ;
+      new moveto(drivesubsystem, 0, -1));
   }
 }

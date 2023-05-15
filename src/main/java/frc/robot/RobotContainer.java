@@ -14,6 +14,7 @@ import frc.robot.Default_Commands.*;
 import frc.robot.Subsystems.*;
 import frc.robot.Variables.SubsystemVariables;
 import frc.robot.auto.autoShortSide;
+import frc.robot.auto.moveto;
 
 public class RobotContainer {
 
@@ -160,6 +161,7 @@ public class RobotContainer {
 
     ButtonX.onTrue(ArcadeDrive);
     ButtonY.onTrue(HeadingDrive);
+    ButtonA.onTrue(new moveto(driveSubsystem, 0, -1));
     //ButtonA.onTrue(AutoBalance);
 
     //Joystick
