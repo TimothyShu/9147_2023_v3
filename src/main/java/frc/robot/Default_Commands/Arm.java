@@ -33,15 +33,19 @@ public class Arm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    String mode = SubsystemVariables.ArmMode;
     double extspeed = JoystickY.getAsDouble();
-    //this changes the values and allows for movement
-    TargetVariables.PivotTargetOffset = JoystickX.getAsDouble() * 2;
-    TargetVariables.TelescopeTargetOffset = JoystickY.getAsDouble();
-    armSubsystem.move_to_position();
-    SmartDashboard.putBoolean("yes", TargetVariables.telescopeauto);
-    if (TargetVariables.telescopeauto == false){
-      armSubsystem.set_extension_speed(extspeed);
+    switch (mode) {
+      case "Manual":
+        TargetVariables.PivotTargetOffset = JoystickX.getAsDouble() * 2;
+        TargetVariables.TelescopeTargetOffset = JoystickY.getAsDouble();
+        armSubsystem.set_extension_speed(extspeed);
+        break;
+      case "Auto":
+        break;
     }
+    armSubsystem.move_to_position();
 
   }
 
