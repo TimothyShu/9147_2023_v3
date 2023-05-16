@@ -6,9 +6,19 @@ package frc.robot.Variables;
 
 /** Add your docs here. */
 public class SubsystemVariables {
+    //Drive
     public static String DriveMode = "Arcade";
     public static String ArmPos = "Default";
-    public static String GrabberMode = "Retract";
 
     public static double DriveAutoBalanceAngle = 0;
+
+    //Arm
+    public static String ArmMode = "Manual";
+
+    //Grabber
+    public static boolean CompressorEnabled = false;
+    public static boolean PressureSwitch = false;
+    public static double CompressorCurrent = 0;
+    
+    public static String GrabberMode = "Retract";
 }

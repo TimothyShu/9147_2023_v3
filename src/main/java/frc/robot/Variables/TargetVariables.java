@@ -12,7 +12,6 @@ public class TargetVariables {
     public static double BaseTelescopeTarget = 0.5;
     public static double PivotTargetOffset = 0;
     public static double TelescopeTargetOffset = 0;
-    public static boolean telescopeauto = false;
 
     public static double GetPivot() {
         return BasePivotTarget + PivotTargetOffset;
