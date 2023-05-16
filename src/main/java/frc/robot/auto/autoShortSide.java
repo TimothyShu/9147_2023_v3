@@ -5,8 +5,10 @@
 package frc.robot.auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.ArmSubsystem;
 import frc.robot.Subsystems.DriveSubsystem;
+import frc.robot.Subsystems.PneumaticGrabber;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -15,12 +17,21 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 public class autoShortSide extends SequentialCommandGroup {
   /** Creates a new autoShorSide. */
 
-  public autoShortSide(ArmSubsystem armSubsystem, DriveSubsystem drivesubsystem) {
+  public autoShortSide(ArmSubsystem armSubsystem, DriveSubsystem drivesubsystem, PneumaticGrabber pneumaticGrabber) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new InstantCommand(() -> {pneumaticGrabber.Retract();}),
       new InstantCommand(() -> {armSubsystem.Position2();}),
-      new extendTelescope(armSubsystem, 2),
-      new moveto(drivesubsystem, 0, -1));
+      new SetTelescope(armSubsystem, 0.5, 1.8),
+      new InstantCommand(() -> {pneumaticGrabber.Extend();}),
+      new WaitCommand(0.1),
+      new InstantCommand(() -> {armSubsystem.DefaultPosition();}),
+      new SetTelescope(armSubsystem, -0.5, 1.8),
+      //extend the grabber
+      new AutoDrive(drivesubsystem,-0.6, 0.2),
+      new WaitCommand(10)
+      );
+
   }
 }
