@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Default_Commands.*;
 import frc.robot.Subsystems.*;
 import frc.robot.Variables.SubsystemVariables;
+import frc.robot.auto.autoLongSide;
 import frc.robot.auto.autoShortSide;
 import frc.robot.auto.moveto;
 
@@ -27,9 +29,16 @@ public class RobotContainer {
 
   ArmSubsystem armSubsystem = new ArmSubsystem();
   DriveSubsystem driveSubsystem = new DriveSubsystem();
-  GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
+  PneumaticGrabber pneumaticGrabber = new PneumaticGrabber();
   GyroSubsystem gyroSubsystem = new GyroSubsystem();
   OdometrySubsystem odometrySubsystem = new OdometrySubsystem(gyroSubsystem, driveSubsystem);
+
+  //Chooser
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  //Auto Commands
+  Command ShortSide = new autoShortSide(armSubsystem, driveSubsystem, pneumaticGrabber);
+  Command LongSide = new autoLongSide(driveSubsystem, armSubsystem, pneumaticGrabber);
 
   // __________________________
   //|                          |
@@ -70,48 +79,6 @@ public class RobotContainer {
     }
   }, driveSubsystem);
 
-  InstantCommand DefaultPos = new InstantCommand(new Runnable() {
-    @Override
-    public void run() {
-      armSubsystem.DefaultPosition();
-    }
-  }, armSubsystem);
-
-  InstantCommand Pos1 = new InstantCommand(new Runnable() {
-    @Override
-    public void run() {
-      armSubsystem.Position1();;
-    }
-  }, armSubsystem);
-  
-  InstantCommand Pos2 = new InstantCommand(new Runnable() {
-    @Override
-    public void run() {
-      armSubsystem.Position2();
-    }
-  }, armSubsystem);
-
-  InstantCommand Pos3 = new InstantCommand(new Runnable() {
-    @Override
-    public void run() {
-      armSubsystem.Position3();
-    }
-  }, armSubsystem);
-
-  InstantCommand RetractGrabber = new InstantCommand(new Runnable() {
-    @Override
-    public void run() {
-      SubsystemVariables.GrabberMode = "Retract";
-    }
-  }, grabberSubsystem);
-
-  InstantCommand ExtendGrabber = new InstantCommand(new Runnable() {
-    @Override 
-    public void run() {
-      SubsystemVariables.GrabberMode = "Retract";
-    }
-  }, grabberSubsystem);
-
   // __________________________
   //|                          |
   //|    RobotContainer        |
@@ -120,6 +87,8 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureBindings();
+    m_chooser.addOption("Short Side", ShortSide);
+    m_chooser.addOption("Long Side", LongSide);
   }
 
   private void configureBindings() {
@@ -128,8 +97,6 @@ public class RobotContainer {
     armSubsystem.setDefaultCommand(new Arm(armSubsystem, () -> getJoystickY(), () -> GetJoystickX()));
 
     driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, () -> joystick1.getLeftY(), () -> joystick1.getRightY(), () -> joystick1.getRightX()));
-
-    grabberSubsystem.setDefaultCommand(new Grabber(grabberSubsystem));
 
 
     Trigger leftTrigger = new JoystickButton(joystick1, 5);
@@ -169,8 +136,8 @@ public class RobotContainer {
     Button_left_down.onTrue(new InstantCommand(() -> {armSubsystem.Position1();}));
     Button_right_up.onTrue(new InstantCommand(() -> {armSubsystem.Position2();}));
     Button_right_down.onTrue(new InstantCommand(() -> {armSubsystem.Position3();}));
-    Trigger_front.onTrue(new InstantCommand(() -> {SubsystemVariables.GrabberMode = "Retract";}));
-    Side_button.onTrue(new InstantCommand(() -> {SubsystemVariables.GrabberMode = "Extend";}));
+    Trigger_front.onTrue(new InstantCommand(() -> {pneumaticGrabber.Retract();}));
+    Side_button.onTrue(new InstantCommand(() -> {pneumaticGrabber.Extend();}));
   }
 
   private double GetJoystickX () {
@@ -182,6 +149,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new autoShortSide(armSubsystem, driveSubsystem);
+    return m_chooser.getSelected();
   }
 }
