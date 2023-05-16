@@ -9,13 +9,15 @@ import frc.robot.Subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Variables.SubsystemVariables;
 
-public class driveForward extends CommandBase {
+public class AutoDrive extends CommandBase {
   /** Creates a new driveForward. */
   private DriveSubsystem drivesubsystem;
   private double time;
   private double starttime;
-  public driveForward(DriveSubsystem drivesubsystem, double time) {
+  private double speed;
+  public AutoDrive(DriveSubsystem drivesubsystem,double speed, double time) {
     this.drivesubsystem = drivesubsystem;
+    this.speed = speed;
     this.time = time;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -30,7 +32,7 @@ public class driveForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivesubsystem.Arcadedrive(0.5, 0);
+    drivesubsystem.Arcadedrive(speed, 0);
   }
 
   // Called once the command ends or is interrupted.
