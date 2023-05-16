@@ -7,16 +7,19 @@ package frc.robot.auto;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.ArmSubsystem;
-import frc.robot.Variables.TargetVariables;
+import frc.robot.Variables.SubsystemVariables;
 
-public class extendTelescope extends CommandBase {
+public class SetTelescope extends CommandBase {
   private ArmSubsystem armSubsystem;
   private double time;
   private double starttime;
+  private double speed;
+
   /** Creates a new extendTelescope. */
-  public extendTelescope(ArmSubsystem armSubsystem, double time) {
+  public SetTelescope(ArmSubsystem armSubsystem, double speed, double time) {
     this.armSubsystem = armSubsystem;
     this.time = time;
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -24,13 +27,12 @@ public class extendTelescope extends CommandBase {
   @Override
   public void initialize() {
     this.starttime = Timer.getFPGATimestamp();
-    TargetVariables.telescopeauto = true;
+    SubsystemVariables.ArmMode = "Auto";
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = -0.5;
     armSubsystem.set_extension_speed(speed);
   }
 
@@ -38,7 +40,7 @@ public class extendTelescope extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     armSubsystem.set_extension_speed(0);
-    TargetVariables.telescopeauto = false;
+    SubsystemVariables.ArmMode = "Manual";
   }
 
   // Returns true when the command should end.
