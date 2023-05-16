@@ -12,13 +12,11 @@ public class SubsystemsAll extends SubsystemBase {
   /** Creates a new Subsystems. */
   public DriveSubsystem driveSubsystem;
   public ArmSubsystem armSubsystem;
-  public GrabberSubsystem grabberSubsystem;
   public VisionSubsystem visionSubsystem;
   public GyroSubsystem gyroSubsystem;
   public SubsystemsAll() {
     driveSubsystem = new DriveSubsystem();
     armSubsystem = new ArmSubsystem();
-    grabberSubsystem = new GrabberSubsystem();
     visionSubsystem = new VisionSubsystem();
     gyroSubsystem = new GyroSubsystem();
   }
