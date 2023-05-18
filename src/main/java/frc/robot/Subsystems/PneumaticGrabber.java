@@ -15,10 +15,10 @@ import frc.robot.Variables.SubsystemVariables;
 public class PneumaticGrabber extends SubsystemBase {
 
   //This is our compressor
-  Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.REVPH);
 
   //This is our solenoid
-  DoubleSolenoid grabberSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
+  DoubleSolenoid grabberSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1, 2);
 
   /** Creates a new PneumaticGrabber. */
   public PneumaticGrabber() {
