@@ -39,7 +39,7 @@ public class Arm extends CommandBase {
     switch (mode) {
       case "Manual":
         TargetVariables.PivotTargetOffset = JoystickX.getAsDouble() * 2;
-        TargetVariables.TelescopeTargetOffset = JoystickY.getAsDouble();
+        TargetVariables.TelescopeTargetOffset = -JoystickY.getAsDouble();
         armSubsystem.set_extension_speed(extspeed);
         break;
       case "Auto":

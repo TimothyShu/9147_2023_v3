@@ -22,9 +22,10 @@ public class autoLongSide extends SequentialCommandGroup {
     addCommands(
       new InstantCommand(() -> {pneumaticGrabber.Retract();}),
       new InstantCommand(() -> {armSubsystem.Position2();}),
-      new SetTelescope(armSubsystem, 0.5, 1.8),
+      new SetTelescope(armSubsystem, 0.5, 2),
+      new WaitCommand(0.5),
       new InstantCommand(() -> {pneumaticGrabber.Extend();}),
-      new WaitCommand(0.1),
+      new WaitCommand(0.5),
       new InstantCommand(() -> {armSubsystem.DefaultPosition();}),
       new SetTelescope(armSubsystem, -0.5, 1.8),
       //extend the grabber
