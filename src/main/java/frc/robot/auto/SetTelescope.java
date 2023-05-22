@@ -19,7 +19,7 @@ public class SetTelescope extends CommandBase {
   public SetTelescope(ArmSubsystem armSubsystem, double speed, double time) {
     this.armSubsystem = armSubsystem;
     this.time = time;
-    this.speed = speed;
+    this.speed = -speed;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

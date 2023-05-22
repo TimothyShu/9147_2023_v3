@@ -4,20 +4,19 @@
 
 package frc.robot.auto;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.ArmSubsystem;
 import frc.robot.Subsystems.DriveSubsystem;
 import frc.robot.Subsystems.PneumaticGrabber;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class autoShortSide extends SequentialCommandGroup {
-  /** Creates a new autoShorSide. */
-
-  public autoShortSide(ArmSubsystem armSubsystem, DriveSubsystem drivesubsystem, PneumaticGrabber pneumaticGrabber) {
+public class autoMidSide extends SequentialCommandGroup {
+  /** Creates a new autoMidSide. */
+  public autoMidSide(DriveSubsystem drivesubsystem, ArmSubsystem armSubsystem, PneumaticGrabber pneumaticGrabber) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -30,10 +29,8 @@ public class autoShortSide extends SequentialCommandGroup {
       new WaitCommand(0.5),
       new InstantCommand(() -> {armSubsystem.DefaultPosition();}),
       new SetTelescope(armSubsystem, -1, 1.8),
-      //extend the grabber
-      new AutoDrive(drivesubsystem,-0.6, 1.5),
-      new WaitCommand(10)
-      );
-
+      new PreAutobalance(drivesubsystem),
+      new AutoBalance(drivesubsystem)
+    );
   }
 }

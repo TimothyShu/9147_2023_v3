@@ -16,7 +16,9 @@ import frc.robot.Default_Commands.*;
 import frc.robot.Subsystems.*;
 import frc.robot.Variables.SubsystemVariables;
 import frc.robot.auto.autoLongSide;
+import frc.robot.auto.autoMidSide;
 import frc.robot.auto.autoShortSide;
+import frc.robot.auto.autoTest;
 import frc.robot.auto.moveto;
 
 public class RobotContainer {
@@ -40,6 +42,8 @@ public class RobotContainer {
   //Auto Commands
   Command ShortSide = new autoShortSide(armSubsystem, driveSubsystem, pneumaticGrabber);
   Command LongSide = new autoLongSide(driveSubsystem, armSubsystem, pneumaticGrabber);
+  Command Test = new autoTest(armSubsystem, driveSubsystem, pneumaticGrabber);
+  Command Mid = new autoMidSide(driveSubsystem, armSubsystem, pneumaticGrabber);
 
   // __________________________
   //|                          |
@@ -90,10 +94,13 @@ public class RobotContainer {
     configureBindings();
     m_chooser.addOption("Short Side", ShortSide);
     m_chooser.addOption("Long Side", LongSide);
+    m_chooser.addOption("Test", Test);
+    m_chooser.addOption("Mid", Mid);
     SmartDashboard.putData(m_chooser);
   }
 
   private void configureBindings() {
+
 
     //defaultcommands
     armSubsystem.setDefaultCommand(new Arm(armSubsystem, () -> getJoystickY(), () -> GetJoystickX()));
@@ -125,8 +132,8 @@ public class RobotContainer {
     //Trigger Side_left_down = new JoystickButton(joystick2, 11);
     //Trigger Side_right_down = new JoystickButton(joystick2, 12);
 
-    leftTrigger.onTrue(Coastmode);
-    rightTrigger.onTrue(Brakemode);
+    leftTrigger.onTrue(new InstantCommand(() -> {driveSubsystem.Coastmode();}));
+    rightTrigger.onTrue(new InstantCommand(() -> {driveSubsystem.Brakemode();}));
 
     ButtonX.onTrue(ArcadeDrive);
     ButtonY.onTrue(HeadingDrive);

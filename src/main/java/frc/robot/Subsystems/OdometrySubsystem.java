@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.Subsystems;
-
 import java.util.List;
 
 import edu.wpi.first.math.geometry.Pose2d;

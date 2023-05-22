@@ -138,7 +138,7 @@ public class DriveSubsystem extends SubsystemBase {
     RightMotor1.setIdleMode(IdleMode.kCoast);
     RightMotor2.setIdleMode(IdleMode.kCoast);
     LeftMotor1.setIdleMode(IdleMode.kCoast);
-    LeftMotor1.setIdleMode(IdleMode.kCoast);
+    LeftMotor2.setIdleMode(IdleMode.kCoast);
   }
 
   @Override

@@ -7,49 +7,36 @@ package frc.robot.auto;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.DriveSubsystem;
 import frc.robot.Subsystems.GyroSubsystem;
-import edu.wpi.first.wpilibj.Timer;
-import frc.robot.Variables.SubsystemVariables;
 
-public class AutoDrive extends CommandBase {
-  /** Creates a new driveForward. */
-  private DriveSubsystem drivesubsystem;
-  private double time;
-  private double starttime;
-  private double speed;
-  private double heading;
-  public AutoDrive(DriveSubsystem drivesubsystem,double speed, double time) {
-    this.drivesubsystem = drivesubsystem;
-    this.speed = speed;
-    this.time = time;
+public class PreAutobalance extends CommandBase {
+  /** Creates a new PreAutobalance. */
+  double angle;
+  DriveSubsystem driveSubsystem;
+  public PreAutobalance(DriveSubsystem driveSubsystem) {
+    this.driveSubsystem = driveSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    SubsystemVariables.DriveMode = "Auto";
-    this.starttime = Timer.getFPGATimestamp();
-    this.heading = GyroSubsystem.get_yaw();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivesubsystem.gyro_drive(speed, heading);
+    angle  = GyroSubsystem.get_roll();
+    driveSubsystem.Arcadedrive(-0.6, angle);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    drivesubsystem.Arcadedrive(0, 0);
-    SubsystemVariables.DriveMode = "Arcade";
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double elapsetime = Timer.getFPGATimestamp() - starttime;
-    if (elapsetime >= time) {
+    if (angle > 20) {
       return true;
     } else {
       return false;

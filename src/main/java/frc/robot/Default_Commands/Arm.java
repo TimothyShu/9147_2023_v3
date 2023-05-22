@@ -6,7 +6,6 @@ package frc.robot.Default_Commands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.ArmSubsystem;
 import frc.robot.Variables.SubsystemVariables;
@@ -39,7 +38,7 @@ public class Arm extends CommandBase {
     switch (mode) {
       case "Manual":
         TargetVariables.PivotTargetOffset = JoystickX.getAsDouble() * 2;
-        TargetVariables.TelescopeTargetOffset = -JoystickY.getAsDouble();
+        TargetVariables.TelescopeTargetOffset = JoystickY.getAsDouble();
         armSubsystem.set_extension_speed(extspeed);
         break;
       case "Auto":
