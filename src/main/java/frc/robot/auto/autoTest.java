@@ -30,6 +30,7 @@ public class autoTest extends SequentialCommandGroup {
       new InstantCommand(() -> {armSubsystem.DefaultPosition();}),
       new SetTelescope(armSubsystem, -1, 1.8),
       new WaitCommand(10)*/
+      new PreAutobalance(drivesubsystem),
       new AutoBalance(drivesubsystem)
     );
   }

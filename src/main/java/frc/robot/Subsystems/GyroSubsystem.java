@@ -7,6 +7,7 @@ package frc.robot.Subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.GyroConstants;
 
@@ -52,5 +53,8 @@ public class GyroSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Roll", get_roll());
+    SmartDashboard.putNumber("Pitch", get_pitch());
+    SmartDashboard.putNumber("Yaw", get_yaw());
   }
 }

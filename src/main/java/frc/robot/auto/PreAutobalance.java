@@ -4,14 +4,18 @@
 
 package frc.robot.auto;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.DriveSubsystem;
 import frc.robot.Subsystems.GyroSubsystem;
+import frc.robot.Variables.SubsystemVariables;
 
 public class PreAutobalance extends CommandBase {
   /** Creates a new PreAutobalance. */
   double angle;
+  double heading;
   DriveSubsystem driveSubsystem;
+
   public PreAutobalance(DriveSubsystem driveSubsystem) {
     this.driveSubsystem = driveSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -20,26 +24,31 @@ public class PreAutobalance extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SubsystemVariables.DriveMode = "Auto";
+    heading = GyroSubsystem.get_yaw();
+    angle = GyroSubsystem.get_roll();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     angle  = GyroSubsystem.get_roll();
-    driveSubsystem.Arcadedrive(-0.6, angle);
+    driveSubsystem.gyro_drive(0.3, heading);;
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    SubsystemVariables.DriveMode = "Arcade";
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (angle > 20) {
+    SmartDashboard.putNumber("current angle", angle);
+    if (angle > 10) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 }

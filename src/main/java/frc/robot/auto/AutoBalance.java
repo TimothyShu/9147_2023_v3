@@ -5,6 +5,7 @@
 package frc.robot.auto;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.DriveSubsystem;
 import frc.robot.Subsystems.GyroSubsystem;
@@ -47,17 +48,18 @@ public class AutoBalance extends CommandBase {
       dAngle = 0;
     }
 
-    if (CurrentAngle > 5) {
-      if (dAngle > -240) {
-        driveSubsystem.Arcadedrive(0.4 + CurrentAngle*0.4/30, 0);
+    if (CurrentAngle > 1) {
+      if (dAngle > -50) {
+        driveSubsystem.Arcadedrive(0.1 + CurrentAngle*0.4/20, 0);
       }
     }
 
-    if (CurrentAngle < -5) {
-      if (dAngle < 240) {
-        driveSubsystem.Arcadedrive(-0.4 + CurrentAngle*0.4/30, 0);
+    if (CurrentAngle < -1) {
+      if (dAngle < 50) {
+        driveSubsystem.Arcadedrive(-0.1 + CurrentAngle*0.4/20, 0);
       }
     }
+    SmartDashboard.putNumber("Power", 0.2 + CurrentAngle*0.4/20);
 
     SubsystemVariables.DriveAutoBalanceAngle = CurrentAngle;
   }

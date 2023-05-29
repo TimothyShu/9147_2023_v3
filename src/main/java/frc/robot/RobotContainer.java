@@ -23,8 +23,8 @@ import frc.robot.auto.moveto;
 
 public class RobotContainer {
 
-  //declare subsystems
 
+  //declare subsystems
 
   XboxController joystick1 = new XboxController(0);
 
@@ -35,6 +35,7 @@ public class RobotContainer {
   PneumaticGrabber pneumaticGrabber = new PneumaticGrabber();
   GyroSubsystem gyroSubsystem = new GyroSubsystem();
   OdometrySubsystem odometrySubsystem = new OdometrySubsystem(gyroSubsystem, driveSubsystem);
+  Lights LED = new Lights();
 
   //Chooser
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -137,8 +138,8 @@ public class RobotContainer {
 
     ButtonX.onTrue(ArcadeDrive);
     ButtonY.onTrue(HeadingDrive);
-    ButtonA.onTrue(new moveto(driveSubsystem, 0, -1));
-    //ButtonA.onTrue(AutoBalance);
+    //ButtonA.onTrue(new moveto(driveSubsystem, 0, -1));
+    ButtonA.onTrue(new InstantCommand(() -> {LED.Set_Colour(255,0, 0);}));
 
     //Joystick
     Button_left_up.onTrue(new InstantCommand(() -> {armSubsystem.DefaultPosition();}));
