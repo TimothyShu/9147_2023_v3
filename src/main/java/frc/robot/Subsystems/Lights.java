@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Lights extends SubsystemBase {
   /** Creates a new Lights. */
-  AddressableLED LED = new AddressableLED(0);
+  AddressableLED LED = new AddressableLED(8);
   AddressableLEDBuffer LED_Buffer = new AddressableLEDBuffer(30);
 
   public Lights() {
@@ -26,10 +26,13 @@ public class Lights extends SubsystemBase {
     for (var i = 0; i < LED_Buffer.getLength(); i++) {
       LED_Buffer.setRGB(i, Red, Green, Blue);
     }
+    LED.setData(LED_Buffer);
   }
+
 
   @Override
   public void periodic() {
+    LED.setData(LED_Buffer);
     // This method will be called once per scheduler run
   }
 }

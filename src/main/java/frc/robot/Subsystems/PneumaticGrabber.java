@@ -25,7 +25,7 @@ public class PneumaticGrabber extends SubsystemBase {
 
     pcmCompressor.enableDigital();
     //dissable the compressor
-    //pcmCompressor.disable();
+    pcmCompressor.disable();
   }
 
   public void setGrabber(Value value) {

@@ -98,6 +98,7 @@ public class RobotContainer {
     m_chooser.addOption("Test", Test);
     m_chooser.addOption("Mid", Mid);
     SmartDashboard.putData(m_chooser);
+    LED.Set_Colour(255, 255, 255);
   }
 
   private void configureBindings() {
